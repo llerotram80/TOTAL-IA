@@ -40,6 +40,7 @@
 </main>
 <script>
 const chat=document.querySelector('#chat'), form=document.querySelector('#form'), input=document.querySelector('#input');
+  let history=[];
 function add(text,cls){const d=document.createElement('div');d.className='msg '+cls;d.textContent=text;chat.appendChild(d);chat.scrollTop=chat.scrollHeight}
 form.addEventListener('submit', async e=>{
   e.preventDefault();
@@ -47,6 +48,7 @@ form.addEventListener('submit', async e=>{
   if(!t)return;
 
   add(t,'user');
+  history.push({role:'user',content:t{);
   input.value='';
   add('Pensant...','bot');
 
@@ -54,13 +56,14 @@ form.addEventListener('submit', async e=>{
     const r=await fetch('https://total-ia.joanmartorellm.workers.dev/',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({message:t})
+      body:JSON.stringify({message:t,history:history})
     });
 
     const data=await r.json();
 
     const bots=chat.querySelectorAll('.bot');
     bots[bots.length-1].textContent=data.reply || data.error || 'No he pogut obtenir resposta.';
+    history.push({role:'assistant',content:data.reply}
   }catch(error){
     const bots=chat.querySelectorAll('.bot');
     bots[bots.length-1].textContent='Error de connexió amb Total IA.';
