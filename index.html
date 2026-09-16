@@ -63,7 +63,7 @@ form.addEventListener('submit', async e=>{
 
     const bots=chat.querySelectorAll('.bot');
     bots[bots.length-1].textContent=data.reply || data.error || 'No he pogut obtenir resposta.';
-    history.push({role:'assistant',content:data.reply}
+   history.push({role:'assistant',content:data.reply});
   }catch(error){
     const bots=chat.querySelectorAll('.bot');
     bots[bots.length-1].textContent='Error de connexió amb Total IA.';
