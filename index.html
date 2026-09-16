@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#07111f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Total IA">
+  <title>Total IA</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <style>
+    *{box-sizing:border-box} html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    body{color:#fff;background:radial-gradient(circle at 50% -10%,#174b80 0,#09192a 35%,#03070d 75%);min-height:100vh}
+    .app{max-width:760px;margin:auto;min-height:100vh;display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top) + 12px) 14px calc(env(safe-area-inset-bottom) + 8px)}
+    header{text-align:center;padding:18px 0 10px}.logo{width:82px;height:82px;margin:auto;border-radius:25px;border:1px solid #33d5ff;background:linear-gradient(145deg,#0c2036,#07111e);display:grid;place-items:center;box-shadow:0 0 35px #008cff77;font-size:40px}
+    h1{margin:12px 0 2px;font-size:30px;letter-spacing:2px}.blue{color:#39d8ff}.sub{font-size:13px;color:#9eb7cb}
+    .tools{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}.tool{appearance:none;color:#dbe9f5;background:#0b1928;border:1px solid #1b3b58;border-radius:16px;padding:11px 3px;font-size:12px}.tool span{display:block;font-size:22px;margin-bottom:4px}
+    .chat{flex:1;min-height:350px;max-height:56vh;overflow:auto;background:#07111dcc;border:1px solid #17344f;border-radius:22px;padding:14px;box-shadow:inset 0 1px 0 #ffffff0a}
+    .msg{max-width:88%;padding:11px 13px;border-radius:17px;margin:8px 0;line-height:1.4}.bot{background:#0e2539;border:1px solid #1c496d}.user{background:#087fbd;margin-left:auto}
+    .composer{display:flex;gap:8px;padding:12px 0 5px}.composer input{min-width:0;flex:1;background:#0b1724;color:#fff;border:1px solid #24435f;border-radius:18px;padding:14px;font-size:16px;outline:none}.composer button{border:0;border-radius:18px;background:#25c9fa;color:#00131d;font-size:19px;font-weight:900;padding:0 19px}
+    .foot{text-align:center;color:#6f879a;font-size:11px;padding:5px}.status{font-size:11px;color:#74a2bf;text-align:center;margin-bottom:4px}
+  </style>
+</head>
+<body>
+<main class="app">
+  <header><div class="logo">🧠</div><h1>TOTAL <span class="blue">IA</span></h1><div class="sub">La teva intel·ligència artificial personal</div></header>
+  <section class="tools">
+    <button class="tool" data-name="Fotos"><span>📷</span>Fotos</button>
+    <button class="tool" data-name="Veu"><span>🎤</span>Veu</button>
+    <button class="tool" data-name="Documents"><span>📄</span>Documents</button>
+    <button class="tool" data-name="Internet"><span>🌐</span>Internet</button>
+  </section>
+  <section id="chat" class="chat">
+    <div class="msg bot">Hola! 👋 Som <b>Total IA</b>. Aquesta és la primera versió instal·lable. El xat visual ja funciona i està preparat per connectar-hi el motor d’IA.</div>
+  </section>
+  <form id="form" class="composer"><input id="input" autocomplete="off" placeholder="Escriu a Total IA…"><button aria-label="Enviar">➤</button></form>
+  <div id="status" class="status">Prototip local · sense cost</div>
+  <div class="foot">TOTAL IA 1.0</div>
+</main>
+<script>
+const chat=document.querySelector('#chat'), form=document.querySelector('#form'), input=document.querySelector('#input');
+function add(text,cls){const d=document.createElement('div');d.className='msg '+cls;d.textContent=text;chat.appendChild(d);chat.scrollTop=chat.scrollHeight}
+form.addEventListener('submit',e=>{e.preventDefault();const t=input.value.trim();if(!t)return;add(t,'user');input.value='';setTimeout(()=>add("T'he llegit. El següent pas serà connectar aquesta interfície a un motor d’IA gratuït.",'bot'),250)});
+document.querySelectorAll('.tool').forEach(b=>b.onclick=()=>add("Mòdul "+b.dataset.name+": preparat per a una pròxima versió.",'bot'));
+if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js');
+</script>
+</body></html>

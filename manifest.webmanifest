@@ -1,0 +1,11 @@
+{
+  "name": "Total IA",
+  "short_name": "Total IA",
+  "description": "La teva intel·ligència artificial personal",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#03070d",
+  "theme_color": "#07111f",
+  "lang": "ca"
+}
