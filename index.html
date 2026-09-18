@@ -41,6 +41,8 @@
 <script>
 const chat=document.querySelector('#chat'), form=document.querySelector('#form'), input=document.querySelector('#input');
   let history=[];
+  const userId = localStorage.getItem('totalIAUserId') || crypto.randomUUID();
+localStorage.setItem('totalIAUserId', userId);
 function add(text,cls){const d=document.createElement('div');d.className='msg '+cls;d.textContent=text;chat.appendChild(d);chat.scrollTop=chat.scrollHeight}
 form.addEventListener('submit', async e=>{
   e.preventDefault();
@@ -56,7 +58,7 @@ form.addEventListener('submit', async e=>{
     const r=await fetch('https://total-ia.joanmartorellm.workers.dev/',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({message:t,history:history})
+     body:JSON.stringify({message:t,history:history,userId:userId})
     });
 
     const data=await r.json();
